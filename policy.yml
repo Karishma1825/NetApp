@@ -1,0 +1,17 @@
+---
+- name: create a new snapshot policy
+  hosts: localhost
+  tasks:
+    - name: Create SnapMirror policy
+      netapp.ontap.na_ontap_snapmirror_policy:
+        state: present
+        vserver: SAN
+        policy_name: ansible_policy
+        policy_type: mirror_vault
+        comment: created by ansible
+        transfer_schedule: hourly  
+        hostname: 192.168.100.29
+        username: ansible
+        password: Hitachi@123
+        https: true
+        validate_certs: false

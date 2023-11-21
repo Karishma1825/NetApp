@@ -1,0 +1,19 @@
+---
+- name: create mirror
+  hosts: localhost
+  tasks:
+    - name: Create ONTAP SnapMirror
+        netapp.ontap.na_ontap_snapmirror:
+          state: present
+          source_volume: FAS2750CL_FC_root
+          destination_volume: DNAS_NBU_root
+          source_vserver: FAS2750CL_FC
+          destination_vserver: DNAS_NBU_root
+          schedule: hourly
+          policy: MirrorAllSnapshots
+          max_transfer_rate: 1000
+          initialize: False
+          hostname: 192.168.100.29
+          username: ansible
+          password: Hitachi@123
+

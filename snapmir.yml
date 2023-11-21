@@ -1,0 +1,20 @@
+---
+- name: create mirror
+  hosts: localhost
+  vars:
+    - source_volume: ansible_test123
+  tasks:
+    - name: Create ONTAP SnapMirror
+      netapp.ontap.na_ontap_snapmirror:
+        state: present
+        source_volume: "{{ source_volume }}" 
+        destination_volume: ansible_test123_dest
+        source_vserver: SAN
+        destination_vserver: FAS2750CL_FC
+        schedule: hourly
+        policy: MirrorAllSnapshots
+        max_transfer_rate: 1000
+        relationship_state: active
+        hostname: 192.168.100.53
+        username: Ansible
+        password: Hitachi@123
